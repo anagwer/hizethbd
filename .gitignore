@@ -1,0 +1,8 @@
+# Ignore raw iPhone originals (converted .jpg and .mp4 are tracked instead)
+*.MOV
+*.mov
+*.HEIC
+*.heic
+.DS_Store
+Thumbs.db
+

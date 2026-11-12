@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Happy Birthday, hizetblue! — Blue Pixel Story by anagwer</title>
+  <link rel="icon" type="image/png" href="element/pokeball.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Pixel Sky Backdrop -->
+  <div class="sky-backdrop" aria-hidden="true">
+    <div class="stars-layer" id="starsLayer"></div>
+    <img src="element/moon.png" alt="" class="sky-moon pixel-art" />
+    <img src="element/shootingstar.png" alt="" class="shooting-star pixel-art" id="shootingStar" />
+    <img src="element/blue-cloud-1.png" alt="" class="cloud cloud-1 pixel-art" />
+    <img src="element/blue-cloud-2.png" alt="" class="cloud cloud-2 pixel-art" />
+    <img src="element/blue-cloud-3.png" alt="" class="cloud cloud-3 pixel-art" />
+    <img src="element/pink-cloud-1.png" alt="" class="cloud cloud-4 pixel-art" />
+    <img src="element/pink-cloud-2.png" alt="" class="cloud cloud-5 pixel-art" />
+    <img src="element/pink-cloud-3.png" alt="" class="cloud cloud-6 pixel-art" />
+  </div>
+
+  <!-- Sticky Pixel Game HUD -->
+  <header class="hud-bar" id="hudBar">
+    <div class="hud-left">
+      <img src="element/pokeball.png" alt="" class="hud-icon pixel-art" />
+      <span class="hud-player">hizetblue</span>
+      <span class="hud-lvl">LVL+1</span>
+    </div>
+    <div class="hud-stats">
+      <div class="hud-stat" title="Story Quest Progress">
+        <img src="element/crown.png" alt="Quest" class="hud-icon pixel-art" />
+        <span>QUEST <strong id="questProgressCount">0</strong>/6</span>
+      </div>
+      <div class="hud-stat" title="Target: 50 Coins untuk Hadiah Utama">
+        <img src="element/coin.png" alt="Coin" class="hud-icon pixel-art" />
+        <span><strong id="coinCount">0</strong>/50</span>
+      </div>
+      <div class="hud-stat" title="Target: 75 Love untuk Hadiah Utama">
+        <img src="element/many-love-blue.png" alt="Love" class="hud-icon pixel-art" />
+        <span><strong id="hudLoveCount">0</strong>/75</span>
+      </div>
+      <button type="button" class="pixel-btn btn-audio" id="audioToggleBtn" aria-label="Toggle Music">
+        ♪ OFF
+      </button>
+    </div>
+  </header>
+
+  <main class="world-container">
+    <!-- ==================== PROLOG: TITLE SCREEN ==================== -->
+    <section class="stage stage-hero" id="stageHero">
+      <div class="hero-badges">
+        <img src="element/logo-pokemon.png" alt="Pixel Quest" class="hero-logo pixel-art float-step" />
+      </div>
+
+      <div class="hero-title-wrap hero-overlay-box">
+        <p class="hero-kicker">★ A BLUE PIXEL STORY BY ANAGWER ★</p>
+        <h1 class="hero-title">HAPPY BIRTHDAY,<br /><span>hizetblue!</span></h1>
+        <p class="hero-subtitle">
+          Malam ini dunia pixel berubah jadi biru spesial buat ulang tahunmu. Ikuti ceritanya dari awal sampai akhir untuk membuka <strong>Hadiah Utama</strong>!
+        </p>
+        <div class="hero-mission-note">
+          <span>🎯 Misi:</span> Tap koin, kado, peti &amp; bintang di bawah untuk kumpulin koin. Target akhir: <strong>50 Koin + 75 Love</strong>!
+        </div>
+      </div>
+
+      <!-- Interactive Pixel Meadow Props -->
+      <div class="hero-meadow">
+        <button type="button" class="prop-btn coin-prop" id="heroCoinBtn" aria-label="Collect Coin">
+          <img src="element/coin.png" alt="Coin" class="pixel-art" id="heroCoinImg" />
+          <span class="prop-hint">Tap!</span>
+        </button>
+
+        <button type="button" class="prop-btn gift-prop" id="heroGiftBtn" aria-label="Open Gift Box">
+          <img src="element/gift-box.png" alt="Gift Box" class="pixel-art bob-step" />
+          <span class="prop-hint">Gift!</span>
+        </button>
+
+        <div class="hero-duo">
+          <img src="element/person-pokemon-front.png" alt="Trainer hizetblue" class="trainer-hero pixel-art bob-step" />
+          <img src="element/cute-pokemon.gif" alt="Cute Pokemon" class="cute-gif pixel-art" />
+        </div>
+
+        <button type="button" class="prop-btn chest-prop" id="heroChestBtn" aria-label="Open Treasure">
+          <img src="element/treasure.png" alt="Treasure" class="pixel-art bob-step-delay" />
+          <span class="prop-hint">Loot!</span>
+        </button>
+
+        <button type="button" class="prop-btn star-prop" id="heroStarBtn" aria-label="Touch Mario Star">
+          <img src="element/star-mario.png" alt="Star" class="pixel-art float-step" />
+          <span class="prop-hint">★</span>
+        </button>
+      </div>
+
+      <div class="hero-actions">
+        <button type="button" class="pixel-btn btn-start" id="pressStartBtn">
+          ▶ MULAI PETUALANGAN
+        </button>
+      </div>
+
+      <!-- Level Up Popup Box -->
+      <div class="level-up-card hidden" id="levelUpCard" role="status">
+        <img src="element/level-up-dialog.png" alt="Level Up" class="level-up-icon pixel-art" />
+        <div class="level-up-text">
+          <h3>PROLOG: LEVEL UP!</h3>
+          <p><strong>hizetblue</strong> naik level! Tapi sebelum dapat hadiah utamanya, kumpulkan dulu teman-teman Pokémon di Chapter 1.</p>
+          <a href="#stageGame" class="pixel-btn btn-mini level-next-btn">Lanjut ke Chapter 1 ↓</a>
+        </div>
+        <div class="level-up-rewards">
+          <img src="element/crown.png" alt="Crown" class="pixel-art" />
+          <img src="element/mushroom.png" alt="1-UP" class="pixel-art" />
+        </div>
+      </div>
+
+      <div class="horizon-trees" aria-hidden="true">
+        <img src="element/pine-tree.png" alt="" class="pixel-art" />
+        <img src="element/tree.png" alt="" class="pixel-art" />
+        <img src="element/triangle-tree.png" alt="" class="pixel-art" />
+        <img src="element/tree.png" alt="" class="pixel-art" />
+        <img src="element/pine-tree.png" alt="" class="pixel-art" />
+      </div>
+    </section>
+
+    <div class="stage-divider" aria-hidden="true">
+      <img src="element/dekoratif-border.png" alt="" class="pixel-art" />
+    </div>
+
+    <!-- ==================== CHAPTER 1: POKEMON MINI-GAME ==================== -->
+    <section class="stage stage-game" id="stageGame">
+      <div class="story-bridge">
+        <span class="bridge-step">CHAPTER 01</span>
+        <p>Untuk mulai perayaan, <strong>hizetblue</strong> harus mengumpulkan 6 Birthday Squad yang lagi berkeliaran di padang biru!</p>
+      </div>
+
+      <div class="section-header">
+        <span class="stage-tag">QUEST 01 // CATCH THE SQUAD</span>
+        <h2>KUMPULKAN BIRTHDAY SQUAD</h2>
+        <p class="section-desc">
+          Gerakkan trainer pakai <strong>Arrow / WASD</strong> (+ <strong>Space</strong> lempar Pokéball), atau di HP cukup <strong>tap langsung Pokémon</strong>-nya!
+        </p>
+      </div>
+
+      <div class="console-shell">
+        <div class="console-topbar">
+          <span class="console-title">BLUE-BOY ADVANCE // SQUAD: <strong id="gameScoreLabel">0 / 6</strong></span>
+          <div class="console-btns">
+            <button type="button" class="pixel-btn btn-mini" id="resetGameBtn">↻ Reset</button>
+            <a href="#stageMario" class="pixel-btn btn-mini">Lanjut ↓</a>
+          </div>
+        </div>
+
+        <div class="game-arena" id="gameArena" tabindex="0" aria-label="Arena Mini Game Pokemon">
+          <canvas id="gameCanvas" class="pixel-art"></canvas>
+
+          <div class="game-victory hidden" id="gameVictory">
+            <div class="victory-icons">
+              <img src="element/medal.png" alt="Medal" class="pixel-art bob-step" />
+              <img src="element/thropy.png" alt="Trophy" class="pixel-art float-step" />
+              <img src="element/crown.png" alt="Crown" class="pixel-art bob-step-delay" />
+            </div>
+            <h3>CHAPTER 1 COMPLETE!</h3>
+            <p>Semua Birthday Squad udah ngumpul! Sekarang lari &amp; lompat ala Mario bareng trainer Pokémon untuk ngumpulin <strong>Love</strong>!</p>
+            <div class="victory-btns">
+              <button type="button" class="pixel-btn btn-secondary" id="playGameAgainBtn">Main Lagi</button>
+              <a href="#stageMario" class="pixel-btn btn-start">Lanjut Mario Love Run ↓</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="rpg-dialog" id="gameDialog">
+          <img src="element/pokeball.png" alt="" class="dialog-avatar pixel-art" id="dialogAvatar" />
+          <div class="dialog-body">
+            <span class="dialog-speaker" id="dialogSpeaker">PROF. BLUE</span>
+            <p id="dialogMessage">Tap Pokémon di arena atau gerakkan trainer untuk menangkap semuanya!</p>
+          </div>
+        </div>
+
+        <div class="touch-controls" aria-label="Kontrol Game Sentuh">
+          <div class="dpad">
+            <button type="button" class="dpad-btn dpad-up" data-dir="up" aria-label="Atas">▲</button>
+            <button type="button" class="dpad-btn dpad-left" data-dir="left" aria-label="Kiri">◀</button>
+            <button type="button" class="dpad-btn dpad-down" data-dir="down" aria-label="Bawah">▼</button>
+            <button type="button" class="dpad-btn dpad-right" data-dir="right" aria-label="Kanan">▶</button>
+          </div>
+          <button type="button" class="pixel-btn btn-throw" id="throwBallBtn">
+            <img src="element/pokeball.png" alt="" class="pixel-art" />
+            THROW!
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div class="stage-divider" aria-hidden="true">
+      <img src="element/dekoratif-border.png" alt="" class="pixel-art" />
+    </div>
+
+    <!-- ==================== CHAPTER 2: SUPER BLUE MARIO LOVE RUN ==================== -->
+    <section class="stage stage-mario" id="stageMario">
+      <div class="story-bridge">
+        <span class="bridge-step">CHAPTER 02</span>
+        <p>Squad udah siap! Sekarang ayo main <strong>Super Blue Run</strong> pakai karakter Pokémon — sundul kotak <strong>?</strong> &amp; ambil hati buat ngumpulin <strong>Love</strong>!</p>
+      </div>
+
+      <div class="section-header">
+        <span class="stage-tag">QUEST 02 // MARIO LOVE RUN</span>
+        <h2>MARIO × POKÉMON LOVE RUN</h2>
+        <p class="section-desc">
+          Gerak pakai <strong>◀ ▶</strong> (Arrow/A-D) &amp; lompat pakai <strong>Space / Tap Layar</strong>. Kumpulin hati sampai garis finish!
+        </p>
+      </div>
+
+      <div class="console-shell">
+        <div class="console-topbar">
+          <span class="console-title">
+            LOVE: <strong id="marioLoveLabel">0</strong> • KOIN: <strong id="marioCoinLabel">0</strong>
+          </span>
+          <div class="console-btns">
+            <button type="button" class="pixel-btn btn-mini" id="resetMarioBtn">↻ Ulang</button>
+            <a href="#stageCake" class="pixel-btn btn-mini">Lanjut Tiup Lilin ↓</a>
+          </div>
+        </div>
+
+        <div class="mario-arena">
+          <canvas id="marioCanvas" class="pixel-art" tabindex="0" aria-label="Mini Game Mario Pokemon"></canvas>
+          <img src="element/cute-pokemon.gif" alt="Goal Mascot" class="mario-goal-gif pixel-art" id="marioGoalGif" />
+
+          <div class="game-victory hidden" id="marioVictory">
+            <div class="victory-icons">
+              <img src="element/cute-pokemon.gif" alt="Finish" class="pixel-art" style="width: 108px;" />
+            </div>
+            <h3>FINISH! STAGE CLEAR!</h3>
+            <p>Keren, <strong>hizetblue</strong>! Bonus <strong>+5 Love &amp; +5 Koin</strong> masuk ke tas!</p>
+            <div class="victory-btns">
+              <button type="button" class="pixel-btn btn-secondary" id="playMarioAgainBtn">Main Lagi</button>
+              <a href="#stageCake" class="pixel-btn btn-start">Lanjut Tiup Lilin ↓</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mario-controls" aria-label="Kontrol Mario">
+          <div class="mario-lr">
+            <button type="button" class="dpad-btn mario-pad-btn" data-mario="left" aria-label="Kiri">◀</button>
+            <button type="button" class="dpad-btn mario-pad-btn" data-mario="right" aria-label="Kanan">▶</button>
+          </div>
+          <button type="button" class="pixel-btn btn-throw mario-pad-btn" data-mario="jump">
+            ▲ LOMPAT!
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div class="stage-divider" aria-hidden="true">
+      <img src="element/dekoratif-border.png" alt="" class="pixel-art" />
+    </div>
+
+    <!-- ==================== CHAPTER 3: TIUP LILIN ==================== -->
+    <section class="stage stage-cake" id="stageCake">
+      <div class="story-bridge">
+        <span class="bridge-step">CHAPTER 03</span>
+        <p>Love udah mulai terkumpul! Sekarang saatnya <strong>hizetblue</strong> make a wish dan tiup semua lilin ulang tahunnya.</p>
+      </div>
+
+      <div class="section-header">
+        <span class="stage-tag">QUEST 03 // MAKE A WISH</span>
+        <h2>TIUP LILIN ULANG TAHUN</h2>
+        <p class="section-desc">
+          Tap langsung nyala api di atas kue, klik tombol <strong>Tiup Lilin</strong>, atau aktifkan <strong>Mic</strong> buat tiup beneran!
+        </p>
+      </div>
+
+      <div class="rpg-card cake-card">
+        <div class="cake-status-bar">
+          <span>Lilin Menyala: <strong id="candlesLeftLabel">5 / 5</strong></span>
+          <span class="mic-pill" id="micStatusPill">Mode: Tap / Klik</span>
+        </div>
+
+        <div class="cake-stage">
+          <canvas id="cakeCanvas" class="pixel-art" width="320" height="240" aria-label="Kue Ulang Tahun Pixel dengan Lilin"></canvas>
+        </div>
+
+        <div class="cake-actions">
+          <button type="button" class="pixel-btn btn-start" id="blowAllBtn">
+            💨 Tiup Lilin!
+          </button>
+          <button type="button" class="pixel-btn btn-secondary" id="micBlowBtn">
+            🎤 Tiup Pakai Mic
+          </button>
+          <button type="button" class="pixel-btn btn-mini" id="relightBtn">
+            🔥 Nyalakan Lagi
+          </button>
+        </div>
+
+        <div class="cake-wish-reveal hidden" id="cakeWishReveal">
+          <img src="element/sparkle-yellow.png" alt="" class="pixel-art" />
+          <div>
+            <h4>★ MAKE A WISH GRANTED! ★</h4>
+            <p>Semua lilin berhasil padam! Semoga doa yang barusan kamu ucapkan dalam hati satu per satu terkabul, <strong>hizetblue</strong>. Sekarang amplop suratnya udah siap dibuka!</p>
+            <a href="#stageQuest" class="pixel-btn btn-mini">Buka Surat di Chapter 4 ↓</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="stage-divider" aria-hidden="true">
+      <img src="element/dekoratif-border.png" alt="" class="pixel-art" />
+    </div>
+
+    <!-- ==================== CHAPTER 4: INTERACTIVE LETTER DECK & GACHA ==================== -->
+    <section class="stage stage-quest" id="stageQuest">
+      <div class="story-bridge">
+        <span class="bridge-step">CHAPTER 04</span>
+        <p>Setelah lilin padam, muncul <strong>Dek Kartu Surat</strong> dari <strong>anagwer</strong> &amp; <strong>Mesin Gacha Rahasia</strong>!</p>
+      </div>
+
+      <div class="section-header">
+        <span class="stage-tag">QUEST 04 // LETTER DECK &amp; GACHA</span>
+        <h2>SURAT &amp; MESIN GACHA RAHASIA</h2>
+        <p class="section-desc">
+          Buka segel amplop untuk baca 3 kartu ucapan interaktif, lalu putar <strong>Gacha Kapsul</strong> buat dapat pesan lucu + bonus Koin &amp; Love!
+        </p>
+      </div>
+
+      <div class="quest-grid">
+        <!-- Interactive Card-Deck Letter -->
+        <div class="rpg-card letter-deck-card">
+          <div class="envelope-stage" id="envelopeStage">
+            <button type="button" class="envelope-btn" id="envelopeBtn" aria-label="Buka Segel Amplop">
+              <img src="element/envelope-close.png" alt="Amplop Tersegel" class="pixel-art bob-step" id="envelopeImg" />
+              <span class="tap-pill" id="envelopeHint">✨ Tap untuk pecahkan segel surat!</span>
+            </button>
+          </div>
+
+          <div class="deck-box hidden" id="scrollBox">
+            <div class="deck-topbar">
+              <span class="deck-badge">FROM: anagwer</span>
+              <span class="deck-page" id="deckPageLabel">KARTU 1 / 3</span>
+            </div>
+
+            <div class="story-card-view" id="storyCardView">
+              <img src="element/scroll-letter.png" alt="" class="story-card-art pixel-art float-step" id="deckArt" />
+              <h3 class="story-card-title" id="deckTitle">Hai hizetblue!</h3>
+              <p class="story-card-body" id="deckBody"></p>
+            </div>
+
+            <div class="deck-nav">
+              <button type="button" class="pixel-btn btn-mini" id="prevCardBtn">◀ Sebelumnya</button>
+              <button type="button" class="pixel-btn btn-mini" id="nextCardBtn">Berikutnya ▶</button>
+            </div>
+
+            <div class="letter-reactions" id="letterReactions">
+              <span class="react-label">Kirim reaksi ke anagwer (+2 Koin &amp; +2 Love):</span>
+              <div class="react-btns">
+                <button type="button" class="pixel-btn btn-mini react-btn" data-reply="Hehe senang banget bacanya! 💙">💙 Makasih anagwer</button>
+                <button type="button" class="pixel-btn btn-mini react-btn" data-reply="Aamiin! Doain terus ya~ ✨">✨ Aamiin</button>
+                <button type="button" class="pixel-btn btn-mini react-btn" data-reply="Siap lanjut ambil hadiah! 🎁">🎁 Gas lanjut!</button>
+              </div>
+              <p class="react-feedback hidden" id="reactFeedback"></p>
+            </div>
+
+            <div class="after-letter-nav">
+              <a href="#stageMemories" class="pixel-btn btn-mini">Lihat Album Kenangan ↓</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mystery Gacha Machine -->
+        <div class="rpg-card gacha-card">
+          <div class="card-title-row">
+            <span>🎲 MESIN GACHA RAHASIA</span>
+            <small id="gachaCountLabel">0 / 4 Terbuka</small>
+          </div>
+
+          <div class="gacha-machine">
+            <button type="button" class="gacha-orb-btn" id="gachaSpinBtn" aria-label="Putar Gacha Pesan">
+              <img src="element/pokeball.png" alt="Gacha Orb" class="gacha-orb pixel-art float-step" id="gachaOrbImg" />
+              <span class="pixel-btn btn-start gacha-cta">🎲 PUTAR GACHA!</span>
+            </button>
+
+            <div class="gacha-result" id="gachaResult">
+              <img src="element/cat-lazy.png" alt="" class="gacha-prize-img pixel-art" id="gachaPrizeImg" />
+              <div class="gacha-prize-text">
+                <h4 id="gachaPrizeTitle">Siap Diputar!</h4>
+                <p id="gachaPrizeDesc">Putar gacha di atas buat dapetin pesan rahasia + bonus Koin &amp; Love!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="stage-divider" aria-hidden="true">
+      <img src="element/dekoratif-border.png" alt="" class="pixel-art" />
+    </div>
+
+    <!-- ==================== CHAPTER 4: MEMORY FRAMES ==================== -->
+    <section class="stage stage-memories" id="stageMemories">
+      <div class="story-bridge">
+        <span class="bridge-step">CHAPTER 04</span>
+        <p>Di balik gulungan surat tadi, tersimpan album kenangan perjalanan kita berdua. Tap tiap bingkai untuk lihat lebih dekat!</p>
+      </div>
+
+      <div class="section-header">
+        <span class="stage-tag">QUEST 04 // MEMORY ALBUM</span>
+        <h2>FRAMES OF US</h2>
+        <p class="section-desc">
+          Potongan momen seru bareng <strong>hizetblue</strong> — klik foto atau video untuk layar penuh.
+        </p>
+      </div>
+
+      <div class="featured-duo-strip">
+        <img src="element/you-and-me.png" alt="You and Me" class="you-me-art pixel-art float-step" />
+        <div class="rpg-mini-note">
+          <img src="element/sparkle-yellow.png" alt="" class="pixel-art" />
+          <p>Makasih udah selalu jadi versi terbaikmu dan bikin hari-hari terasa lebih seru, <strong>hizetblue</strong>.</p>
+        </div>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <div class="stage-divider" aria-hidden="true">
+      <img src="element/dekoratif-border.png" alt="" class="pixel-art" />
+    </div>
+
+    <!-- ==================== CHAPTER 5 (EPILOG): PIXELLANCE LOVE BURST ==================== -->
+    <section class="stage stage-finale" id="stageFinale">
+      <div class="story-bridge">
+        <span class="bridge-step">EPILOG // FINAL</span>
+        <p>Petualangan hampir selesai! Sebelum ditutup, tap poster spesial <strong>hizetblue</strong> di bawah ini sebanyak mungkin!</p>
+      </div>
+
+      <div class="section-header">
+        <span class="stage-tag">FINAL CHAPTER // LOVE BURST</span>
+        <h2>TAP POSTER hizetblue!</h2>
+        <p class="section-desc">
+          Klik atau tap posternya berkali-kali — lihat hujan love warna-warni yang muncul!
+        </p>
+      </div>
+
+      <div class="finale-shrine">
+        <img src="element/balloon-cloud.png" alt="" class="shrine-deco deco-left float-step pixel-art" />
+        <img src="element/sword.png" alt="" class="shrine-deco deco-right bob-step pixel-art" />
+
+        <div class="poster-stage" id="posterStage">
+          <button type="button" class="poster-btn-clean" id="pixellanceBtn" aria-label="Klik Poster Pixellance untuk Love Warna Warni">
+            <img src="element/Pixellance.png" alt="Poster Pixellance hizetblue" class="pixellance-poster" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='element/you-and-me.png';}" />
+          </button>
+          <canvas id="loveBurstCanvas" class="love-canvas" aria-hidden="true"></canvas>
+        </div>
+
+        <div class="love-hud">
+          <div class="love-counter-box">
+            <img src="element/pink-love-sparkle.png" alt="" class="pixel-art" />
+            <span>Love sent to <strong>hizetblue</strong>:</span>
+            <strong class="love-number" id="finaleLoveCount">0</strong>
+          </div>
+          <p class="milestone-msg" id="milestoneMsg">Tap posternya buat ngirim love warna-warni!</p>
+        </div>
+
+        <div class="finale-footer-actions">
+          <button type="button" class="pixel-btn btn-start" id="loveRainBtn">★ Love Rain!</button>
+          <a href="#stageHero" class="pixel-btn btn-secondary">↑ Ulang Dari Awal</a>
+        </div>
+
+        <!-- Final Mystery Gift Vault (Unlock: 25 Coins + 50 Love) -->
+        <div class="rpg-card reward-vault" id="rewardVault">
+          <div class="vault-header">
+            <img src="element/gift-box.png" alt="Hadiah Utama" class="vault-icon pixel-art bob-step" id="vaultIcon" />
+            <div>
+              <h3>🎁 KADO UTAMA hizetblue</h3>
+              <p class="vault-sub">Syarat buka kado spesial dari <strong>anagwer</strong>:</p>
+            </div>
+          </div>
+
+          <div class="vault-checklist">
+            <div class="vault-req" id="reqCoins">
+              <span id="reqCoinsIcon">⬜</span>
+              <span>Kumpulkan 50 Koin (<strong id="vaultCoinNow">0</strong>/50)</span>
+            </div>
+            <div class="vault-req" id="reqLove">
+              <span id="reqLoveIcon">⬜</span>
+              <span>Kirim 75 Love (<strong id="vaultLoveNow">0</strong>/75)</span>
+            </div>
+          </div>
+
+          <button type="button" class="pixel-btn btn-vault-locked" id="claimRewardBtn">
+            🔒 KUMPULKAN 50 KOIN &amp; 75 LOVE DULU
+          </button>
+
+          <div class="reward-unlocked-box hidden" id="rewardUnlockedBox">
+            <div class="reward-badge-row">
+              <img src="element/crown.png" alt="" class="pixel-art" />
+              <img src="element/many-love-blue.png" alt="" class="pixel-art" />
+              <img src="element/thropy.png" alt="" class="pixel-art" />
+            </div>
+            <h4>★ SELAMAT, hizetblue! ★</h4>
+            <p class="reward-prize">Kamu mendapatkan <strong>Kaos yang Dibuat dengan Love</strong>!</p>
+            <p class="reward-wait-note">📦 Tunggu hadiahnya sampai di tangan kamu ya! — <strong>anagwer</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <footer class="pixel-footer">
+        <p>Happy Birthday, <strong>hizetblue</strong>! 💙</p>
+        <p class="wm-credit">Crafted with love • made by <strong>anagwer</strong></p>
+      </footer>
+    </section>
+  </main>
+
+  <!-- Subtle Floating Watermark -->
+  <div class="wm-badge" aria-label="Watermark">by anagwer</div>
+
+  <!-- Toast Notification -->
+  <div class="pixel-toast hidden" id="pixelToast" role="status"></div>
+
+  <!-- Lightbox Modal for Memory Gallery -->
+  <div class="lightbox hidden" id="lightbox" role="dialog" aria-modal="true">
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox-card">
+      <button type="button" class="pixel-btn btn-mini lightbox-close" id="lightboxClose">✕ Tutup</button>
+      <div class="lightbox-media-wrap" id="lightboxMedia"></div>
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+  </div>
+
+  <script src="js/audio.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/mario.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
